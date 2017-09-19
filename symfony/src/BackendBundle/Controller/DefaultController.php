@@ -22,29 +22,14 @@ class DefaultController extends Controller
     public function pruebasAction()
     {
         //return $this->render('BackendBundle:Default:index.html.twig');
+        $helpers = $this->get("app.helpers");
+
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('BackendBundle:User')->findAll();
 
-        return $this->json($users);
+        return $helpers->json($users);
     }
 
-    public function json($data){
-
-    	$normalizers = array(new GetSetMethodNormalizer);
-
-    	$encoders = array("json" => new JsonEncoder())	;
-
-    	$serializer = new Serializer($normalizers,$encoders);
-
-    	$json = $serializer->serialize($data,'json');
-
-    	$response = new Response();
-
-    	$response->setContent($json);
-
-    	$response->headers->set("Content-Type","application/json");
-
-    	return $response;
-    }
+    
 }
