@@ -35,6 +35,7 @@ class DefaultController extends Controller
     public function loginAction(Request $request){
 
     	$helpers = $this->get("app.helpers");
+    	$jwt_auth = $this->get("app.jwt_auth");
 
     	$json = $request->get("json",null);
 
@@ -55,19 +56,26 @@ class DefaultController extends Controller
 
     		if (count($validate_email) == 0 && $password != null) {
     			
-    			echo "Data success!!";
+    			$signIn = $jwt_auth->signIn($email,$password);    			
+
+    			return $helpers->json($signIn);
+
     		}else{
 
     			echo "Data incorrect!!";
+
+    			die();
     		}
 
 
     	}else{
 
     		echo "Send json with post!";
+
+    		die();
     	}
 
-    	die();
+    	
     }
 
     
