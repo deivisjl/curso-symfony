@@ -21,16 +21,24 @@ class DefaultController extends Controller
     }
 
 
-    public function pruebasAction()
+    public function pruebasAction(Request $request)
     {
         //return $this->render('BackendBundle:Default:index.html.twig');
         $helpers = $this->get("app.helpers");
 
-        $em = $this->getDoctrine()->getManager();
 
-        $users = $em->getRepository('BackendBundle:User')->findAll();
 
-        return $helpers->json($users);
+        /*$em = $this->getDoctrine()->getManager();
+
+        $users = $em->getRepository('BackendBundle:User')->findAll();*/
+
+        $hash = $request->get('authorization', null);
+
+        $check = $helpers->authCheck($hash, true);
+
+        //return $helpers->json($users);
+
+        return new JsonResponse($check);
     }
 
     public function loginAction(Request $request){
