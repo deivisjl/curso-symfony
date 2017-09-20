@@ -66,4 +66,42 @@ class JwtAuth
 			return array("status" => "error", "data"=>"Login failed!!");
 		}
 	}
+
+	public function checkToken($jwt, $getIdentity = false){
+
+		$key = "clave-secreta";
+
+		$auth = false;
+
+
+		try {
+
+			$decoded = JWT::decode($jwt, $key, array('HS256'));
+			
+		} catch (\UnexpectedValueException $e) {
+
+			$auth = false;
+			
+		}catch(\DomainException $e){
+
+			$auth = false;
+		}
+
+		if (isset($decoded->sub)) {
+			
+			$auth = true;
+		}else{
+
+			$auth = false;
+		}
+
+		if ($getIdentity == true) {
+			
+			return $decoded;
+		}else{
+
+			return $auth;
+		}
+
+	}
 }
