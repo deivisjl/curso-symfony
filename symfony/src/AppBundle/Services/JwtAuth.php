@@ -36,8 +36,31 @@ class JwtAuth
 
 		}
 		if ($signIn == true) {
+
+			$token = array(
+				"sub" => $user->getId(),
+				"email" => $user->getEmail(),
+				"name" => $user->getName(),
+				"surname" => $user->getSurname(),
+				"password" => $user->getPassword(),
+				"image" => $user->getImage(),
+				"iat" => time(),
+				"exp" => time () + (7 * 25 * 60 * 60)
+				);
+
+			$jwt = JWT::encode($token, $key, 'HS256');
+
+			$decoded = JWT::decode($jwt, $key, array('HS256'));
+
+			if ($getHash != null) {
+				
+				return $jwt;
+			}else{
+
+				return $decoded;
+			}
+
 			
-			return array("status" => "success", "data"=>"Login success!!");
 		}else{
 
 			return array("status" => "error", "data"=>"Login failed!!");
