@@ -28,7 +28,7 @@ class UserController extends Controller
 
 		if ($json != null) {
 			
-			$createdAt = new Datetime("now");
+			$createdAt = new \Datetime("now");
 
 			$role = "user";
 
@@ -65,7 +65,9 @@ class UserController extends Controller
 
 					$user->setSurname($surname);
 
-					$user->setPassword($password);
+					$pwd = hash('sha256', $password);
+
+					$user->setPassword($pwd);
 
 					$em = $this->getDoctrine()->getManager();
 
@@ -80,6 +82,8 @@ class UserController extends Controller
 						$em->flush();
 
 						$data["status"] = 'success';
+
+						$data["code"] = 200;
 
 						$data["msg"] = 'New user Created';
 					}else{
