@@ -17,13 +17,114 @@ use BackendBundle\Entity\Video;
 /**
 * 
 */
-class VideoController
+class VideoController extends Controller
 {
 	
-	public function  pruebasAction(){
+	public function  newAction(Request $request){
 
-		echo "Hola controlador video";
+		$helpers = $this->get("app.helpers");
 
-		die();
+		$hash = $request->get("authorization",null);
+
+		$authCheck = $helpers->authCheck($hash);
+
+		if ($authCheck == true) {
+
+			$identity = $helpers->authCheck($hash, true);
+
+			$json = $request->get("json", null);
+
+
+			if ($json != null)  {
+				
+				$params = json_decode($json);
+
+				$createdAt = new \DateTime('now');
+
+				$updatedAt = new \DateTime('now');
+
+				$imagen = null;
+
+				$video_path = null;
+
+				$user_id = ($identity->sub != null) ? $identity->sub : null;
+
+				$title = (isset($params->title)) ? $params->title : null;
+
+				$description = (isset($params->description)) ? $params->description : null;
+
+				$status = (isset($params->status)) ? $params->status : null;
+
+				if ($user_id != null && $title != null) {
+					
+					$em = $this->getDoctrine()->getManager();
+
+					$user = $em->getRepository("BackendBundle:User")->findOneBy(
+							array(
+									"id" => $user_id
+								)
+						);
+
+					$video = new Video();
+
+					$video->setUser($user);
+
+					$video->setTitle($title);
+
+					$video->setDescription($description);
+
+					$video->setStatus($status);
+
+					$video->setCreatedAt($createdAt);
+
+					//$video->setUpdatedAt($updatedAt);
+
+					$em->persist($video);
+
+					$em->flush();
+
+					$video = $em->getRepository("BackendBundle:Video")->findOneBy(
+							array(
+									"user" => $user,
+									"title" => $title,
+									"status" => $status,
+									"createdAt" => $createdAt,
+								)
+						);
+
+					$data = array(
+							"status" => "success",
+							"code" => 200,
+							"data" => $video
+						);
+				}else{
+
+					$data = array(
+							"status" => "error",
+							"code" => 200,
+							"msg" => "Video not created"
+						);
+
+				}
+
+			}else{
+
+				$data = array(
+							"status" => "error",
+							"code" => 200,
+							"msg" => "Video not created, params failded"
+						);				
+			}
+			
+		}else{
+
+			$data = array(
+					"status" => "error",
+					"code" => 400,
+					"msg" => "Authorization not valid"
+				);
+		}
+
+		return $helpers->json($data);
 	}
 }
