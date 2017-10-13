@@ -234,4 +234,132 @@ class VideoController extends Controller
 
 		return $helpers->json($data);
 	}
+
+	public function uploadAction(Request $request, $id){
+
+		$helpers = $this->get("app.helpers");
+
+		//$hash = $request->headers->get('Authorization');
+
+		$hash = $request->get("authorization", null);
+
+		$authCheck = $helpers->authCheck($hash);
+
+		if ($authCheck == true) {
+
+			$identity = $helpers->authCheck($hash, true);
+
+			$video_id = $id;
+
+			$em = $this->getDoctrine()->getManager();
+
+			$video = $em->getRepository("BackendBundle:Video")->findOneBy(
+					array(
+							"id" => $video_id
+						)
+				);
+
+			if ($video_id != null && isset($identity->sub) && $identity->sub == $video->getUser()->getId()) {
+
+				$file_video = $request->files->get('video',null);
+
+				$file = $request->files->get('image',null);
+
+				if ($file != null  && !empty($file)) {
+									
+					$ext = $file->guessExtension();
+
+					if ($ext == "jpeg" || $ext == "jpg" || $ext == "png") {
+
+						$file_name = time() . "." . $ext;
+
+						$path_of_file = "uploads/video_images/video_" . $video_id;
+
+						$file->move($path_of_file, $file_name);
+
+						$video->setImage($file_name);
+
+						$em->persist($video);
+
+						$em->flush();
+
+						$data = array(
+								"status" => "success",
+								"code" => 200,
+								"msg" => "Image saved"
+							);
+
+					}else{
+
+						$data = array(
+								"status" => "error",
+								"code" => 400,
+								"msg" => "Image Files not valid"
+							);	
+					}
+
+				}else if($file_video != null && !empty($file_video)){
+
+					$ext = $file_video->guessExtension();
+
+					if ($ext == "mp4" || $ext == "avi") {
+						
+						$file_name = time() . "." . $ext;
+
+						$path_of_file = "uploads/video_files/video_" . $video_id;
+
+						$file_video->move($path_of_file, $file_name);
+
+						$video->setVideoPath($file_name);
+
+						$em->persist($video);
+
+						$em->flush();
+
+						$data = array(
+							"status" => "success",
+							"code" => 200,
+							"msg" => "Video updated"
+						);	
+
+					}else{
+							$data = array(
+								"status" => "error",
+								"code" => 400,
+								"msg" => "Video Files not valid"
+							);
+
+					}
+
+					
+
+				}else{
+
+					$data = array(
+						"status" => "error",
+						"code" => 400,
+						"msg" => "Files not found"
+					);
+				}				
+
+			}else{
+
+				$data = array(
+							"status" => "error",
+							"code" => 200,
+							"msg" => "Video updated error, you not owner"
+						);	
+			}
+
+		}else{
+
+			$data = array(
+					"status" => "error",
+					"code" => 400,
+					"msg" => "Authorization not valid"
+				);
+		}
+
+		return $helpers->json($data);
+	}
 }
