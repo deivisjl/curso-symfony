@@ -1,0 +1,34 @@
+# Created by https://www.gitignore.io/api/angular
+
+### Angular ###
+## Angular ##
+# compiled output
+/angular/dist
+/angular/tmp
+/angular/app/**/*.js
+/angular/app/**/*.js.map
+
+# dependencies
+/angular/node_modules
+/angular/bower_components
+
+# IDEs and editors
+/angular/.idea
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
+.DS_Store
+
+# End of https://www.gitignore.io/api/angular
