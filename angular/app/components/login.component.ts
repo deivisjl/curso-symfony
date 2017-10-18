@@ -4,8 +4,10 @@ import {Component, OnInit} from '@angular/core';
 // Decorador component, indicamos en que etiqueta se va a cargar la plantilla
 @Component({
     selector: 'login',
-    template: `<h1>Formulario de Login</h1>`
+    templateUrl: 'app/view/login.html'
 })
  
 // Clase del componente donde irán los datos y funcionalidades
-export class LoginComponent { }
+export class LoginComponent { 
+	public titulo: string = "Iniciar sesion";
+}
