@@ -1,10 +1,13 @@
 // Importar el núcleo de Angular
 import {Component} from '@angular/core';
+import { ROUTER_DIRECTIVES, Router, ActivatedRouter } from '@angular/router';
  
 // Decorador component, indicamos en que etiqueta se va a cargar la plantilla
 @Component({
     selector: 'my-app',
-    template: `<h1>Hola mundo con Angular 2 !! victorroblesweb.es</h1>`
+    template: `<h1>Hola mundo con Angular 2 !! victorroblesweb.es</h1>
+    			<router-outlet></router-outlet>`,
+    directives: [ROUTER_DIRECTIVES]
 })
  
 // Clase del componente donde irán los datos y funcionalidades
