@@ -1,6 +1,6 @@
 // Importar el núcleo de Angular
 import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, ActivatedRouter } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router, ActivatedRoute } from '@angular/router';
  
 // Decorador component, indicamos en que etiqueta se va a cargar la plantilla
 @Component({

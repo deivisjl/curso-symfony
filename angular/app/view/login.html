@@ -6,17 +6,19 @@
 	</div>
 </div>	
 
-<form>
+<form #loginForm = "ngForm" (ngSubmit)="onSubmit()">
 	<div class="row">
 		<div class="col-md-4">
 			<div class="form-group">
 				<label>Correo electronico</label>
-				<input  class="form-control" type="email" name="" required>
+				<input  #email="ngForm" ngControl="email" [(ngModel)]="user.email" class="form-control" type="email" name="" required>
+				<span *ngIf="!email.valid" class="label label-danger">El email es obligatorio</span>
 			</div>
 
 			<div class="form-group">
 				<label>Contraseña</label>
-				<input class="form-control" type="password" name="">
+				<input #password="ngForm" ngControl="password" [(ngModel)]="user.password" class="form-control" type="password" name="">
+				
 			</div>
 
 			<div class="text-right">
