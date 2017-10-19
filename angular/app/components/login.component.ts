@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit{
 
 												//redireccion
 
-												
+
 											}
 										}
 
@@ -101,5 +101,7 @@ export class LoginComponent implements OnInit{
 			"gethash":"false"
 		};
 
+		console.log(this._loginService.getIdentity());
+		console.log(this._loginService.getToken());
 	}
 }
