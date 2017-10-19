@@ -31,14 +31,14 @@
 									<li><a [routerLink]="['/index']"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>
 
 									<li role="separator" class="divider"></li>
-									<li><a [routerLink]="['/index']"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+									<li><a [routerLink]="['/login',1]"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
 								</ul>
 							</li>
 							
 
 						</ul>
 
-						<ul *ngIf="!identity" class="nav navbar-nav navbar-right">
+						<ul *ngIf="!identity || identity == null" class="nav navbar-nav navbar-right">
 							<li><a [routerLink]="['/register']">Registrarse</a></li>
 							<li><a [routerLink]="['/login']">Login</a></li>
 						</ul>

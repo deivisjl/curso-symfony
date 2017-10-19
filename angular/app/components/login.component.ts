@@ -1,7 +1,8 @@
 // Importar el núcleo de Angular
 import {Component, OnInit} from '@angular/core';
+import { ROUTER_DIRECTIVES, Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../services/login.service';
-}
+
  
 // Decorador component, indicamos en que etiqueta se va a cargar la plantilla
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit{
 	public identity;
 	public token;
 
-	constructor(private _loginService: LoginService){
+	constructor(private _loginService: LoginService, private _route: ActivatedRoute, private _router: Router){
 
 	}
 
@@ -62,7 +63,7 @@ export class LoginComponent implements OnInit{
 												localStorage.setItem('token', token);
 
 												//redireccion
-
+												this._router.navigate(['/index']);
 
 											}
 										}
@@ -101,7 +102,25 @@ export class LoginComponent implements OnInit{
 			"gethash":"false"
 		};
 
-		console.log(this._loginService.getIdentity());
-		console.log(this._loginService.getToken());
+		this._route.params.subscribe(params => {
+
+			let logout = params["id"];
+
+			if(logout == 1){
+
+				localStorage.removeItem('identity');
+				localStorage.removeItem('token');
+				this.identity = null;
+				this.token = null;
+
+				this._router.navigate(['/login']);
+			}
+
+		});
+
+		if (this.identity != null && this.token != null) {
+	  			
+	  			this._router.navigate(['/index']);	
+	  		}
 	}
 }
