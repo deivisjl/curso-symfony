@@ -113,6 +113,8 @@ export class LoginComponent implements OnInit{
 				this.identity = null;
 				this.token = null;
 
+				console.log(this.identity);
+
 				this._router.navigate(['/login']);
 			}
 
