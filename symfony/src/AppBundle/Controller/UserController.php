@@ -201,10 +201,10 @@ class UserController extends Controller
 					}else{
 
 						$data = array(
-						"status" => "error",
-						"code" => 400,
-						"msg" => "User not modified"
-					);
+							"status" => "error",
+							"code" => 400,
+							"msg" => "User not modified"
+						);
 					}
 			}
 
