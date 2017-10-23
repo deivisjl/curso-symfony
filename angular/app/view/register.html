@@ -10,6 +10,12 @@
 	<div class="row">
 
 		<div class="col-md-4">
+
+			<div class="form-group" *ngIf="status == 'success'">
+				<div class="alert alert-success">Registro correcto, ahora puedes identificarte</div>
+				<a [routerLink="['/login']"]>pinchando aqui...</a>	
+			</div>
+
 			<div class="form-group">
 				<label>Nombre</label>
 				<input type="text" class="form-control" #name="ngForm" ngControl="name" [(ngModel)]="user.name">

@@ -54,4 +54,20 @@ export class LoginService{
 
 		return this.token;
 	}
+
+	signUp(user_to_register){
+
+		let json = JSON.stringify(user_to_register);
+
+		let params = "json=" + json;
+
+		console.log(params);
+
+		let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+
+		return this._http.post(this.url + "/user/new", params, { headers: headers })
+						.map(res => res.json());
+		
+	}
+
 }

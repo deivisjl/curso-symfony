@@ -17,6 +17,8 @@ import { User } from '../model/user';
 export class RegisterComponent implements OnInit{
 	public titulo = "Registrarse";
 	public user:User;
+	public errorMessage;
+	public status;
 
 	constructor(
 		private _loginService: LoginService,
@@ -26,6 +28,28 @@ export class RegisterComponent implements OnInit{
 
 	ngOnInit(){
 		this.user = new User(1,"","","","","",null);
+	}
+
+	onSubmit(){
+
+		this._loginService.signUp(this.user).subscribe(
+			response => {
+				this.status = response.status;
+
+				if (this.status != "success") {
+
+					this.status = "error";
+				}
+
+			},
+			error => {
+				this.errorMessage = <any>error;
+				if (this.errorMessage != null) {
+					
+					console.log(this.errorMessage);
+					alert("Error en la peticion");
+				}
+			});
 	}
 
  }
