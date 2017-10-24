@@ -162,7 +162,7 @@ class UserController extends Controller
 
 					$user->setCreatedAt($createdAt);
 
-					$user->setImage($image);
+					//$user->setImage($image);
 
 					$user->setRole($role);
 
