@@ -158,7 +158,7 @@ class UserController extends Controller
 
 			$validate_email = $this->get("validator")->validate($email, $emailConstraint);
 
-			if ($email != null && count ($validate_email) == 0 && $name != null && $surname != null) {
+			if ($email != null && count($validate_email) == 0 && $name != null && $surname != null) {
 
 					$user->setCreatedAt($createdAt);
 
@@ -172,7 +172,7 @@ class UserController extends Controller
 
 					$user->setSurname($surname);
 
-					if ($password != null) {
+					if ($password != null  && !empty($params->password)) {
 						
 						$pwd = hash('sha256', $password);
 
@@ -206,6 +206,13 @@ class UserController extends Controller
 							"msg" => "User not modified"
 						);
 					}
+			}else{
+				$data = array(
+					"status" => "error",
+					"code" => 400,
+					"msg" => "No se pudieron procesar algunos valores"
+				);
+
 			}
 
 		}else{

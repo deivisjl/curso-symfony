@@ -12,8 +12,7 @@
 		<div class="col-md-4">
 
 			<div class="form-group" *ngIf="status == 'success'">
-				<div class="alert alert-success">Registro correcto, ahora puedes identificarte</div>
-				<a [routerLink="['/login']"]>pinchando aqui...</a>	
+				<div class="alert alert-success">Registro correcto, ahora puedes identificarte <a [routerLink]="['/login']">pinchando aqui...</a></div>
 			</div>
 
 			<div class="form-group">
