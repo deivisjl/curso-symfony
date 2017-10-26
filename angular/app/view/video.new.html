@@ -7,6 +7,10 @@
 
 <div class="row">
 	<div class="col-md-4">
+	<div class="alert alert-success" *ngIf="status == 'success'">
+		La informacion basica fue guardada con exito...
+	</div>
+
 		<form #newVideoForm="ngForm" (ngSubmit)="onSubmit()">
 			<div class="form-group">
 				<label>Titulo</label>

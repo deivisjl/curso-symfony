@@ -34,7 +34,6 @@ class VideoController extends Controller
 
 			$json = $request->get("json", null);
 
-
 			if ($json != null)  {
 				
 				$params = json_decode($json);
@@ -112,7 +111,7 @@ class VideoController extends Controller
 				$data = array(
 							"status" => "error",
 							"code" => 200,
-							"msg" => "Video not created, params failded"
+							"msg" => "Video not created, params failed"
 						);				
 			}
 			
