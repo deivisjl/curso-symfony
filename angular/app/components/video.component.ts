@@ -19,6 +19,7 @@ export class VideoComponent implements OnInit{
 	public video;
 	public errorMessage;
 	public status;
+	public uploadImage;
 	
 	constructor(private _loginService: LoginService,
 	            private _uploadService: UploadService,
@@ -26,7 +27,7 @@ export class VideoComponent implements OnInit{
 	            private _route: ActivatedRoute,
 	            private _router: Router
 		) {
-		// code...
+		this.uploadImage = false;
 	}
 
 	ngOnInit(){
@@ -61,6 +62,30 @@ export class VideoComponent implements OnInit{
 				}
 			);
 
+	}
+
+	public filesToUpload:Array<File>;
+	public resultUpload;
+
+	fileChangeEventImage(fileInput:any){
+
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+		console.log(this.filesToUpload);
+		console.log(this.video.id);
+
+		let token = this._loginService.getToken();
+
+		let url = "http://www.symfonyapi.com/symfony/web/app_dev.php/video/upload-image/" + this.video.id;
+
+		this._uploadService.makeFileRequest(token, url, ['image'], this.filesToUpload).then(
+				(result)=>{
+					this.resultUpload = result;
+					console.log(this.resultUpload);
+				},
+				(error) =>{
+					console.log(error);
+				}
+			);
 	}
 
 	callVideoStatus(value){
