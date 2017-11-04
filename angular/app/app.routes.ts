@@ -5,11 +5,13 @@ import { RegisterComponent } from './components/register.component';
 import { DefaultComponent } from './components/default.component';
 import { UserEditComponent } from './components/user.edit.component';
 import { VideoComponent } from './components/video.component';
+import { VideoDetailComponent } from './components/video.detail.component';
 
 export const routes: RouterConfig = [
 	{ path: '', redirectTo: '/index', terminal: true},
 
 	{ path: 'create-video', component: VideoComponent },
+	{ path: 'video/:id', component: VideoDetailComponent },
 
 	{ path: 'index', component: DefaultComponent },
 	{ path: 'login', component: LoginComponent },
