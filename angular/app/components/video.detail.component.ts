@@ -13,8 +13,9 @@ import { Video } from "../model/video";
 })
 
 export class VideoDetailComponent implements OnInit{
-
-	public numero:number;
+	public errorMessage;
+	public video;
+	public status;
 
 	constructor(private _loginService: LoginService,
 	            private _videoService: VideoService,
@@ -27,7 +28,28 @@ export class VideoDetailComponent implements OnInit{
 		this._route.params.subscribe(params => {
 			let id = +params["id"];
 
-			this.numero = id;
+			this._videoService.getVideo(id).subscribe(
+
+					response =>{
+						this.video = response.data;
+						this.status = response.status;
+
+						if(this.status != "success"){
+							this._router.navigate(["/index"]);
+						}
+
+
+					},
+					error => {
+						this.errorMessage = <any>error;
+
+					if (this.errorMessage != null) {
+						console.log(this.errorMessage);
+						alert("Error en la peticion");
+					}
+
+					}
+				);
 		});
 
 	}

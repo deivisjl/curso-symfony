@@ -21,4 +21,9 @@ export class VideoService{
 		return this._http.post(this.url+'/video/new',params,{headers: headers})
 							.map(res => res.json());
 	}
+
+	getVideo(id){
+		
+		return this._http.get(this.url+'/video/detail/'+id).map(res => res.json());
+	}
 }
