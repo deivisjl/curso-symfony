@@ -16,6 +16,7 @@ export class VideoDetailComponent implements OnInit{
 	public errorMessage;
 	public video;
 	public status;
+	public loading = 'show';
 
 	constructor(private _loginService: LoginService,
 	            private _videoService: VideoService,
@@ -37,6 +38,8 @@ export class VideoDetailComponent implements OnInit{
 						if(this.status != "success"){
 							this._router.navigate(["/index"]);
 						}
+
+						this.loading = 'hide';
 
 
 					},
