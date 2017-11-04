@@ -88,7 +88,37 @@ export class VideoComponent implements OnInit{
 			);
 	}
 
+	nextUploadVideo(){
+
+		this.uploadImage = true;
+	}
+
 	callVideoStatus(value){
 		this.video.status = value;
+	}
+
+	fileChangeEventVideo(fileInput:any){
+
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+		console.log(this.filesToUpload);
+		console.log(this.video.id);
+
+		let token = this._loginService.getToken();
+
+		let url = "http://www.symfonyapi.com/symfony/web/app_dev.php/video/upload-video/" + this.video.id;
+
+		this._uploadService.makeFileRequest(token, url, ['video'], this.filesToUpload).then(
+				(result)=>{
+					this.resultUpload = result;
+					console.log(this.resultUpload);
+				},
+				(error) =>{
+					console.log(error);
+				}
+			);
+	}
+
+	redirectToVideo(){
+		this._router.navigate(['/index']);
 	}
 }
