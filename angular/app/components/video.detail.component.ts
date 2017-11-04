@@ -14,6 +14,8 @@ import { Video } from "../model/video";
 
 export class VideoDetailComponent implements OnInit{
 
+	public numero:number;
+
 	constructor(private _loginService: LoginService,
 	            private _videoService: VideoService,
 	            private _route: ActivatedRoute,
@@ -21,6 +23,12 @@ export class VideoDetailComponent implements OnInit{
 		) {}
 
 	ngOnInit(){
-		console.log("video_detail_cargado");
+
+		this._route.params.subscribe(params => {
+			let id = +params["id"];
+
+			this.numero = id;
+		});
+
 	}
 }
