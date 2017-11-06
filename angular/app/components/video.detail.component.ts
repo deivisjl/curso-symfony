@@ -5,11 +5,15 @@ import { VideoService }from "../services/video.service";
 import { User } from "../model/user";
 import { Video } from "../model/video";
 
+
+import { GenerateDatePipe } from "../pipes/generate.date.pipe";
+
 @Component({
 	selector: "video-detail",
 	templateUrl: "app/view/video.detail.html",
 	directives: [ROUTER_DIRECTIVES],
-	providers: [LoginService, VideoService]
+	providers: [LoginService, VideoService],
+	pipes: [GenerateDatePipe]
 })
 
 export class VideoDetailComponent implements OnInit{
