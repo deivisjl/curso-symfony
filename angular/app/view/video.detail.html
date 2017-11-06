@@ -9,3 +9,26 @@
 		<hr/>
 	</div>
 </div>
+
+<div class="row" *ngIf="video">
+	<div class="col-md-8">
+		<video controls id= "video-player">
+			<source src="http://www.symfonyapi.com/symfony/web/uploads/video_files/video_{{video.id}}/{{video.videoPath}}" type="">
+               Tu navegador ya no es compatible
+		</video>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					Subido por <strong>{{ video.user.name }}</strong> el {{video.createdAt.timestamp}}
+				</h3>
+			</div>
+			<div class="panel-body">
+				{{ video.description }}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

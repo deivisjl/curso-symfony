@@ -15,6 +15,10 @@ import { Video } from "../model/video";
 export class VideoDetailComponent implements OnInit{
 	public errorMessage;
 	public video;
+	public id;
+	public videoPath;
+	public descripcion;
+	public name;
 	public status;
 	public loading = 'show';
 
@@ -32,8 +36,14 @@ export class VideoDetailComponent implements OnInit{
 			this._videoService.getVideo(id).subscribe(
 
 					response =>{
+
 						this.video = response.data;
 						this.status = response.status;
+
+						this.id = this.video.id;
+						this.videoPath = this.video.videoPath;
+						this.name = this.video.user.name;
+						this.descripcion = this.video.description;
 
 						if(this.status != "success"){
 							this._router.navigate(["/index"]);
@@ -54,6 +64,8 @@ export class VideoDetailComponent implements OnInit{
 					}
 				);
 		});
+
+		
 
 	}
 }
