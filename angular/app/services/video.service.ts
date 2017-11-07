@@ -26,4 +26,9 @@ export class VideoService{
 		
 		return this._http.get(this.url+'/video/detail/'+id).map(res => res.json());
 	}
+
+	getLastsVideos(){
+
+		return this._http.get("http://www.symfonyapi.com/symfony/web/app_dev.php/video/lasts-videos").map(res => res.json());
+	}
 }

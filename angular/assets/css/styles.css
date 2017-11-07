@@ -27,3 +27,33 @@ body{
 	margin-top: 65px;
 }
 
+#videos-list{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	margin-top: 20px;
+}
+
+.last-video-item{
+	margin-bottom: 5px;
+	font-size: 13 !important;
+}
+
+.last-video-item .last-video-image-thumb{
+	width:  80px;
+	height: 82px;
+	overflow: hidden;
+}
+
+.last-video-image-thumb img{
+	width: 80px;
+}
+
+.last-video-item .data{
+	border: 1px solid #ddd !important;
+	border-radius: 0px 4px 4px 0px;
+	border-left: 0px !important;
+	
+	height: 62px;
+	margin-top: -1px;
+}

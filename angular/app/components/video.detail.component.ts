@@ -25,6 +25,8 @@ export class VideoDetailComponent implements OnInit{
 	public name;
 	public status;
 	public loading = 'show';
+	public lastsVideos;
+	public statusLastsVideos;
 
 	constructor(private _loginService: LoginService,
 	            private _videoService: VideoService,
@@ -66,6 +68,29 @@ export class VideoDetailComponent implements OnInit{
 					}
 
 					}
+				);
+
+				this._videoService.getLastsVideos().subscribe(	
+					response => {
+
+						this.lastsVideos = response.data;
+
+						this.statusLastsVideos = response.status;
+
+						if (this.statusLastsVideos != "success") {
+
+							this._router.navigate(['/index']);
+						}
+					},
+					error => {
+						this.errorMessage = <any>error;
+
+						if (this.errorMessage != null) {
+							console.log(this.errorMessage);
+							alert("Error en la peticion");
+						}
+					}
+
 				);
 		});
 
