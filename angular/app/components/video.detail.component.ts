@@ -37,6 +37,9 @@ export class VideoDetailComponent implements OnInit{
 	ngOnInit(){
 
 		this._route.params.subscribe(params => {
+			
+			this.loading = 'show';
+
 			let id = +params["id"];
 
 			this._videoService.getVideo(id).subscribe(

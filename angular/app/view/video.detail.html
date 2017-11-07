@@ -12,7 +12,7 @@
 
 <div class="row" *ngIf="video">
 	<div class="col-md-8">
-		<video controls id= "video-player">
+		<video controls id= "video-player" *ngIf="loading== 'hide'">
 			<source src="http://www.symfonyapi.com/symfony/web/uploads/video_files/video_{{video.id}}/{{video.videoPath}}" type="">
                Tu navegador ya no es compatible
 		</video>
