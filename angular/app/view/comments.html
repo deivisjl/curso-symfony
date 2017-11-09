@@ -18,7 +18,14 @@
 			</div>
 		</form>
 
-		<div class="clearfix">
+		<div class="clearfix"></div>
+
+		<hr />
+
+		<div class="loader" *ngIf="loading == 'show'">
+			<img src="assets/images/ajax-gray.gir" />
+		</div>
+
 			<div id="comments-list" *ngIf="commentList">
 				<div *ngFor="let comment of commentList" class="comment-item col-md-12 pull-left">
 					<div class="panel panel-default comment-data comment-panel-{{ comment.id }}">
@@ -33,6 +40,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	</div>
 </div>

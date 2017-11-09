@@ -23,6 +23,7 @@ export class CommentsComponent implements OnInit{
 	public errorMessage;
 	public status;
 	public statusComment;
+	public loading = 'show';
 
 	public commentList;
 
@@ -56,6 +57,8 @@ export class CommentsComponent implements OnInit{
 	onSubmit(){
 
 		let token = this._loginService.getToken();
+
+		this.loading = 'show';
 		
 		this._commentService.create(token, this.comment).subscribe(
 				response =>{
@@ -85,6 +88,8 @@ export class CommentsComponent implements OnInit{
 
 	getComments(video_id){
 
+		this.loading = 'show';
+
 		this._commentService.getCommentsOfVideo(video_id).subscribe(
 				response =>{
 					this.statusComment = response.status;
@@ -95,7 +100,7 @@ export class CommentsComponent implements OnInit{
 						}else{
 
 							this.commentList = response.data;
-							console.log(response);
+							this.loading = 'hidden';
 						}
 				},
 				error =>{
