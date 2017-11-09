@@ -100,8 +100,9 @@ export class CommentsComponent implements OnInit{
 						}else{
 
 							this.commentList = response.data;
-							this.loading = 'hidden';
 						}
+
+						this.loading = 'hidden';
 				},
 				error =>{
 					this.errorMessage = <any>error;
