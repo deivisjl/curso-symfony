@@ -3,3 +3,19 @@
 <h4>{{ titulo }}</h4>
 
 <hr />
+
+<div class="row">
+	<div class="col-md-6">
+		<form #newCommentForm="ngForm" (ngSubmit)="onSubmit()">
+			
+			<div class="form-group">
+				<textarea class="form-control" #body="ngForm" ngControl="body" [(ngModel)] ="comment.body"></textarea>
+				<span *ngIf="!body.valid || body.touched">Rellene su comentario</span>
+			</div>
+
+			<div class="form-group">
+				<input type="submit" value="Comentar" class="btn btn-success">
+			</div>
+		</form>
+	</div>
+</div>
