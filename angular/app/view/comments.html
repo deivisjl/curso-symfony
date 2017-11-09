@@ -37,6 +37,9 @@
 						<div class="panel-body">
 							{{ comment.body}}
 						</div>
+
+						<div class="pull-right" *ngIf=" identity.sub == comment.user.id || identity.sub == comment.video.user.id"><span class="glyphicon glyphicon-trash" aria-hidden="true" (click)="deleteComment(comment.id)"> </span></div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>

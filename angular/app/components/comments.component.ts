@@ -113,4 +113,34 @@ export class CommentsComponent implements OnInit{
 				}
 			);
 	}
+
+	deleteComment(id){
+		let comment_panel = <HTMLElement>document.querySelector(".comment-panel-"+id);
+
+		if (comment_panel != null) {
+			
+			comment_panel.style.display = "none";
+
+		}
+
+		let token = this._loginService.getToken();
+
+		this._commentService.delete(token,id).subscribe(
+
+				response => {
+					if (this.statusComment != "success") {
+						this.statusComment = "error";
+					}
+				},
+				error => {
+					this.errorMessage = <any>error;
+
+					if (this.errorMessage != null) {
+						console.log(this.errorMessage);
+						alert(this.errorMessage);
+					}
+				}
+			);
+
+	}
 }
