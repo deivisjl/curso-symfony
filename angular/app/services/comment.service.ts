@@ -19,4 +19,12 @@ export class CommentService{
 		return this._http.post(this.url + "/comment/new", params,{headers: headers})
 							.map(res => res.json());
 	}
+
+
+	getCommentsOfVideo(video_id){
+		
+		return this._http.get(this.url + "/comment/list/" + video_id)
+							.map(res => res.json());
+
+	}
 }

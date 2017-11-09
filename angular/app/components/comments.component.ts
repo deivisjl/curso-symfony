@@ -5,11 +5,14 @@ import { CommentService }from "../services/comment.service";
 import { User } from "../model/user";
 import { Video } from "../model/video";
 
+import { GenerateDatePipe } from "../pipes/generate.date.pipe";
+
 @Component({
 	selector: "comments",
 	templateUrl: "app/view/comments.html",
 	directives: [ROUTER_DIRECTIVES],
-	providers: [LoginService, CommentService]
+	providers: [LoginService, CommentService],
+	pipes: [GenerateDatePipe]
 })
 
 export class CommentsComponent implements OnInit{
@@ -19,6 +22,9 @@ export class CommentsComponent implements OnInit{
 	public identity;
 	public errorMessage;
 	public status;
+	public statusComment;
+
+	public commentList;
 
 	constructor(private _loginService: LoginService,
 	            private _route: ActivatedRoute,
@@ -41,6 +47,7 @@ export class CommentsComponent implements OnInit{
 					};
 
 					//conseguir comentarios
+					this.getComments(id);
 			});
 
 		
@@ -60,11 +67,38 @@ export class CommentsComponent implements OnInit{
 						}else{
 
 							this.comment.body = " ";
+							this.getComments(this.comment.video_id);
 
 						}
 				},
 
 				error => {
+					this.errorMessage = <any>error;
+
+					if (this.errorMessage != null) {
+						console.log(this.errorMessage);
+						alert(this.errorMessage);
+					}
+				}
+			);
+	}
+
+	getComments(video_id){
+
+		this._commentService.getCommentsOfVideo(video_id).subscribe(
+				response =>{
+					this.statusComment = response.status;
+
+						if (this.statusComment != "success") {
+
+							this.statusComment = 'error';
+						}else{
+
+							this.commentList = response.data;
+							console.log(response);
+						}
+				},
+				error =>{
 					this.errorMessage = <any>error;
 
 					if (this.errorMessage != null) {

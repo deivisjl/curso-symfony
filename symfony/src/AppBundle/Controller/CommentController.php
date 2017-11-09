@@ -200,7 +200,7 @@ class CommentController extends Controller
 				"id" => $id
 			));
 
-		$comments = $em->getRepository("BackendBundle:Comment")->findOneBy(array(
+		$comments = $em->getRepository("BackendBundle:Comment")->findBy(array(
 
 				"video" => $video
 
