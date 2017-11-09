@@ -27,6 +27,7 @@
 				{{ video.description }}
 			</div>
 		</div>
+		<comments *ngIf="identity"></comments>
 	</div>
 
 	<div class="col-md-4" *ngIf="lastsVideos">

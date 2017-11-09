@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ROUTER_DIRECTIVES, Router, ActivatedRoute } from "@angular/router";
 import { LoginService }from "../services/login.service";
 import { VideoService }from "../services/video.service";
+import { CommentsComponent } from "./comments.component";
 import { User } from "../model/user";
 import { Video } from "../model/video";
 
@@ -11,7 +12,7 @@ import { GenerateDatePipe } from "../pipes/generate.date.pipe";
 @Component({
 	selector: "video-detail",
 	templateUrl: "app/view/video.detail.html",
-	directives: [ROUTER_DIRECTIVES],
+	directives: [ROUTER_DIRECTIVES, CommentsComponent],
 	providers: [LoginService, VideoService],
 	pipes: [GenerateDatePipe]
 })
@@ -28,6 +29,8 @@ export class VideoDetailComponent implements OnInit{
 	public lastsVideos;
 	public statusLastsVideos;
 
+	public identity;
+
 	constructor(private _loginService: LoginService,
 	            private _videoService: VideoService,
 	            private _route: ActivatedRoute,
@@ -35,6 +38,8 @@ export class VideoDetailComponent implements OnInit{
 		) {}
 
 	ngOnInit(){
+
+		this.identity = this._loginService.getIdentity();
 
 		this._route.params.subscribe(params => {
 			
