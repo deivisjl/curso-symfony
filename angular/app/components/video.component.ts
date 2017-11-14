@@ -119,6 +119,6 @@ export class VideoComponent implements OnInit{
 	}
 
 	redirectToVideo(){
-		this._router.navigate(['/video',this.video_id]);
+		this._router.navigate(['/video',this.video.id]);
 	}
 }

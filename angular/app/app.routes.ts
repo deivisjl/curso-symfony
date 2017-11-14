@@ -14,6 +14,7 @@ export const routes: RouterConfig = [
 	{ path: 'video/:id', component: VideoDetailComponent },
 
 	{ path: 'index', component: DefaultComponent },
+	{ path: 'index/:page', component: DefaultComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'login/:id', component: LoginComponent },
 	{ path: 'user-edit', component: UserEditComponent },

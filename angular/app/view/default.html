@@ -11,4 +11,18 @@
 	</div>
 
 	<hr />
+
+	<div class="all-videos">
+		<ul id="video-list" *ngIf="videos">
+			<li *ngFor="let video of videos" class="video-item col-md-4 pull-left">
+			<div class="video-image-thumb">
+				<img src="http://www.symfonyapi.com/symfony/web/uploads/video_images/video_{{ video.id }}/{{ video.image}}" *ngIf="video.image"/>
+			</div>
+				<div class="data">
+					<h4><a [routerLink]="['/video',video.id]"></a>{{ video.title }}</h4>
+					<p>{{ video.description }}</p>
+				</div>
+			</li>
+		</ul>
+	</div>
 </div>
