@@ -23,6 +23,11 @@ export class DefaultComponent {
 	public status;
 	public loading;
 
+	public pages;
+	public pagePrev = 1;
+	public pageNext = 1;
+	public active;
+
 	constructor(private _loginService: LoginService, private _videoService: VideoService, private _route: ActivatedRoute,
 					private _router: Router){}
 
@@ -41,6 +46,9 @@ export class DefaultComponent {
 				page = 1;
 			}
 
+			this.loading = "show";
+			this.active = page;
+			
 			this._videoService.getVideos(page).subscribe(
 					response=>{
 
@@ -51,6 +59,29 @@ export class DefaultComponent {
 						}else{
 							this.videos = response.data;
 							this.loading = "hide";
+
+							this.pages = [];
+
+							for (let i = 0; i < response.total_pages; i++) {
+
+								this.pages.push(i);
+							}
+
+							if (page >= 2) {
+								
+								this.pagePrev = (page - 1);
+							}else{
+
+								this.pagePrev = page;
+							}
+
+							if (page < response.total_pages || page == 1) {
+								
+								this.pageNext = (page + 1);
+							}else{
+
+								this.pageNext = page;
+							}
 							console.log(this.videos);
 						}
 					},
