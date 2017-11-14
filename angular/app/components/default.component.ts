@@ -21,12 +21,13 @@ export class DefaultComponent {
 
 	public errorMessage;
 	public status;
+	public loading;
 
 	constructor(private _loginService: LoginService, private _videoService: VideoService, private _route: ActivatedRoute,
 					private _router: Router){}
 
 	ngOnInit(){
-
+		this.loading = "show";
 		this.identity = this._loginService.getIdentity();
 		this.getAllVideos();
 
@@ -49,6 +50,7 @@ export class DefaultComponent {
 							this.status = "error";
 						}else{
 							this.videos = response.data;
+							this.loading = "hide";
 							console.log(this.videos);
 						}
 					},

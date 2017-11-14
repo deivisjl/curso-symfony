@@ -11,7 +11,9 @@
 	</div>
 
 	<hr />
-
+	<div class="loader" *ngIf="loading == 'show'">
+		<img src="assets/images/ajax-gray.gif"/>
+	</div>
 	<div class="row">
 	  <div class="col-sm-6 col-md-4" *ngFor="let video of videos">
 	    <div class="thumbnail">
