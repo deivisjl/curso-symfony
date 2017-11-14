@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register.component';
 import { DefaultComponent } from './components/default.component';
 import { UserEditComponent } from './components/user.edit.component';
 import { VideoComponent } from './components/video.component';
+import { VideoEditComponent } from './components/video.edit.component';
 import { VideoDetailComponent } from './components/video.detail.component';
 
 export const routes: RouterConfig = [
@@ -12,6 +13,7 @@ export const routes: RouterConfig = [
 
 	{ path: 'create-video', component: VideoComponent },
 	{ path: 'video/:id', component: VideoDetailComponent },
+	{ path: 'video-edit/:id', component: VideoEditComponent },
 
 	{ path: 'index', component: DefaultComponent },
 	{ path: 'index/:page', component: DefaultComponent },

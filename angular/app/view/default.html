@@ -22,7 +22,7 @@
 		      <div class="caption">
 		        <h3><a [routerLink]="['/video',video.id]"></a>{{ video.title }}</h3>
 		        <p>Subido por <a [routerLink]="['/index']">{{ video.user.name }}{{ video.user.surname}}</a></p>
-		        <p *ngIf="identity && identity != null && identity.sub == video.user.id"><a [routerLink]="['/index']" class="btn btn-primary" role="button">Editar</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+		        <p *ngIf="identity && identity != null && identity.sub == video.user.id"><a [routerLink]="['/video-edit',video.id]" class="btn btn-primary" role="button">Editar</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
 		      </div>
 		    </div>
 		  </div>
