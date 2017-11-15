@@ -23,6 +23,8 @@ export class VideoEditComponent implements OnInit{
 
 	public status_get_video;
 	public changeUpload;
+
+	public identity;
 	
 	constructor(private _loginService: LoginService,
 	            private _uploadService: UploadService,
@@ -34,8 +36,11 @@ export class VideoEditComponent implements OnInit{
 	}
 
 	ngOnInit(){
+		this.identity = this._loginService.getIdentity();
 		this.video = new Video(1,"","","public","null","null",null,null);
 		this.getVideo();
+
+
 	}
 
 	onSubmit(){
@@ -95,6 +100,14 @@ export class VideoEditComponent implements OnInit{
 						if(this.status_get_video != "success"){
 							this._router.navigate(["/index"]);
 						}
+
+						
+
+						if (this.identity && this.identity != null && this.identity.sub == this.video.user.id) {
+							
+							}else{
+								this._router.navigate(["/index"]);
+							}
 
 					},
 					error => {
