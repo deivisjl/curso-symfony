@@ -17,11 +17,23 @@ export class AppComponent{
 	public identity;
 	public token;
 
-	constructor(private _loginService: LoginService){}
+	public searchString;
+
+	constructor(private _loginService: LoginService, private _route: ActivatedRoute,
+					private _router: Router){}
 
 	ngOnInit(){
 
 		this.identity = this._loginService.getIdentity();
 		this.token = this._loginService.getToken();
+	}
+
+	search(){
+		if (this.searchString != null) {
+			
+			this._router.navigate(["/search",this.searchString]);
+		}else{
+			this._router.navigate(["/index"]);
+		}
 	}
 }
