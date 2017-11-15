@@ -20,6 +20,8 @@ export class VideoComponent implements OnInit{
 	public errorMessage;
 	public status;
 	public uploadImage;
+
+	public identity;
 	
 	constructor(private _loginService: LoginService,
 	            private _uploadService: UploadService,
@@ -31,7 +33,17 @@ export class VideoComponent implements OnInit{
 	}
 
 	ngOnInit(){
-		this.video = new Video(1,"","","public","null","null",null,null);
+		let identity = this._loginService.getIdentity();
+
+		this.identity = identity;
+
+		if (identity == null) {
+			
+			this._router.navigate(["/index"]);
+		}else{
+			this.video = new Video(1,"","","public","null","null",null,null);	
+		}
+		
 	}
 
 	onSubmit(){
