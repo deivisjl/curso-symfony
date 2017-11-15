@@ -27,7 +27,7 @@ export class VideoService{
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 
-		return this._http.post(this.url+'/video/edit'+ id,params,{headers: headers})
+		return this._http.post(this.url+'/video/edit/'+ id,params,{headers: headers})
 							.map(res => res.json());
 	}
 

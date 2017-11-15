@@ -11,7 +11,7 @@
 		La informacion basica fue guardada con exito...
 	</div>
 
-		<form #updateVideoForm="ngForm" (ngSubmit)="onSubmit()">
+		<form #updateVideoForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="status == 'error'">
 
 			<div class="form-group">
 				<span>Paso 1 de 3. Informacion basica del video</span>
@@ -42,7 +42,9 @@
 		</form>
 	</div>
 
-	<div class="col-md-4" *ngIf="status == 'success' && uploadImage == false ">
+	<button class="btn-warning" (click)="setChangeUpload('image')" *ngIf="!changeUpload || changeUpload == 'video' || changeUpload == 'false'">Actualizar Imagen</button>
+
+	<div class="col-md-4" *ngIf="changeUpload == 'image'">
 		<h4>Imagen del video</h4>
 			<div class="form-group">
 				<span>Paso 2 de 3. Imagen del video</span>
@@ -62,10 +64,12 @@
 
 			<div id="status"></div>
 
-			<button class="btn btn-default" (click)="nextUploadVideo()">Omitir y subir el video</button>
+			<button class="btn btn-warning" (click)="setChangeUpload('false')">Cerrar</button>
 	</div>
 
-	<div class="col-md-4" *ngIf="status == 'success' && uploadImage == true ">
+	<button class="btn-warning" (click)="setChangeUpload('video')" *ngIf="!changeUpload || changeUpload == 'image' || changeUpload == 'false'">Actualizar Video</button>
+
+	<div class="col-md-4" *ngIf="changeUpload== 'video'">
 		<h4>Sube el video</h4>
 			<div class="form-group">
 				<span>Paso 3 de 3. Sube tu video</span>
@@ -85,7 +89,7 @@
 
 			<div id="status"></div>
 
-			<button class="btn btn-default" (click)="redirectToVideo()">Continuar y visualizar</button>
+			<button class="btn btn-warning" (click)="setChangeUpload('false')">Cerrar</button>
 	</div>
 
 </div>

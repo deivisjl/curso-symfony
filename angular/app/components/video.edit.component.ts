@@ -18,10 +18,11 @@ export class VideoEditComponent implements OnInit{
 	public titulo: string = "Editar video";
 	public video;
 	public errorMessage;
-	public status;
+	public status = 'error';
 	public uploadImage;
 
 	public status_get_video;
+	public changeUpload;
 	
 	constructor(private _loginService: LoginService,
 	            private _uploadService: UploadService,
@@ -73,63 +74,63 @@ export class VideoEditComponent implements OnInit{
 
 	}
 
+	setChangeUpload(value:string){
+
+		this.changeUpload = value;
+	}
+
 	getVideo(){
 
-		// 	this._route.params.subscribe(params => {
+			this._route.params.subscribe(params => {
 
-		// 	let id = +params["id"];
+			let id = +params["id"];
 
-		// 	this._videoService.getVideo(id).subscribe(
+			this._videoService.getVideo(id).subscribe(
 
-		// 			response =>{
+					response =>{
 
-		// 				this.video = response.data;
-		// 				this.status_get_video = response.status;
+						this.video = response.data;
+						this.status_get_video = response.status;
 
-		// 				this.id = this.video.id;
-		// 				this.videoPath = this.video.videoPath;
-		// 				this.name = this.video.user.name;
-		// 				this.descripcion = this.video.description;
+						if(this.status_get_video != "success"){
+							this._router.navigate(["/index"]);
+						}
 
-		// 				if(this.status_get_video != "success"){
-		// 					this._router.navigate(["/index"]);
-		// 				}
+					},
+					error => {
+						this.errorMessage = <any>error;
 
-		// 			},
-		// 			error => {
-		// 				this.errorMessage = <any>error;
+					if (this.errorMessage != null) {
+						console.log(this.errorMessage);
+						alert("Error en la peticion");
+					}
 
-		// 			if (this.errorMessage != null) {
-		// 				console.log(this.errorMessage);
-		// 				alert("Error en la peticion");
-		// 			}
+					}
+				);
 
-		// 			}
-		// 		);
+				// this._videoService.getLastsVideos().subscribe(	
+				// 	response => {
 
-		// 		this._videoService.getLastsVideos().subscribe(	
-		// 			response => {
+				// 		this.lastsVideos = response.data;
 
-		// 				this.lastsVideos = response.data;
+				// 		this.statusLastsVideos = response.status;
 
-		// 				this.statusLastsVideos = response.status;
+				// 		if (this.statusLastsVideos != "success") {
 
-		// 				if (this.statusLastsVideos != "success") {
+				// 			this._router.navigate(['/index']);
+				// 		}
+				// 	},
+				// 	error => {
+				// 		this.errorMessage = <any>error;
 
-		// 					this._router.navigate(['/index']);
-		// 				}
-		// 			},
-		// 			error => {
-		// 				this.errorMessage = <any>error;
+				// 		if (this.errorMessage != null) {
+				// 			console.log(this.errorMessage);
+				// 			alert("Error en la peticion");
+				// 		}
+				// 	}
 
-		// 				if (this.errorMessage != null) {
-		// 					console.log(this.errorMessage);
-		// 					alert("Error en la peticion");
-		// 				}
-		// 			}
-
-		// 		);
-		// });
+				// );
+		});
 
 	}
 
